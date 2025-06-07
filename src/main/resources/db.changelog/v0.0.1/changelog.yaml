@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
-      file: table-template.sql
+      file: table-payment.sql
       relativeToChangelogFile: true

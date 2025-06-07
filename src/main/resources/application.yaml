@@ -1,13 +1,13 @@
 server:
-  port: 8080
+  port: 8083
   servlet:
-    context-path: /template
+    context-path: /payment
 
 spring:
   application:
-    name: template
+    name: payment-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/projects?currentSchema=template
+    url: jdbc:postgresql://localhost:5432/projects?currentSchema=payment
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: admin
@@ -16,20 +16,3 @@ spring:
     enabled: true
   kafka:
     bootstrap-servers: localhost:9092
-
-#Circuit Breaker
-resilience4j:
-  circuitbreaker:
-    configs:
-      default:
-        slidingWindowSize: 10
-        permittedNumberOfCallsInHalfOpenState: 3
-        slowCallDurationThreshold: 4s
-        slowCallRateThreshold: 90
-        failureRateThreshold: 50
-        waitDurationInOpenState: 10s
-        minimumNumberOfCalls: 10
-    instances:
-      myCircuitBreaker:
-        baseConfig: default
-        waitDurationInOpenState: 20s
