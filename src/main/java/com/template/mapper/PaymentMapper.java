@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 @Mapper(componentModel = "spring", imports = {LocalDate.class})
@@ -20,9 +21,10 @@ public interface PaymentMapper {
     @Mapping(target = "date", expression = "java(LocalDate.now())")
     PaymentEntity toPaymentEntity(ProductTookEvent event);
 
+    @Mapping(target = "orderId", source = "orderId")
     @Mapping(target = "orderName", source = "entity.orderName")
     @Mapping(target = "price", source = "entity.price")
     @Mapping(target = "status", source = "entity.status")
     @Mapping(target = "date", source = "entity.date")
-    PaymentDoneEvent toPaymentDoneEvent(PaymentEntity entity);
+    PaymentDoneEvent toPaymentDoneEvent(UUID orderId, PaymentEntity entity);
 }

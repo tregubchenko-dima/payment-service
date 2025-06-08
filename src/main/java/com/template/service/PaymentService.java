@@ -40,7 +40,7 @@ public class PaymentService {
         try {
             if (paymentMode) {
                 kafkaTemplate.send(
-                        MessageBuilder.withPayload(objectMapper.writeValueAsString(paymentMapper.toPaymentDoneEvent(paymentEntity)))
+                        MessageBuilder.withPayload(objectMapper.writeValueAsString(paymentMapper.toPaymentDoneEvent(event.getOrderId(), paymentEntity)))
                                 .setHeader(KafkaHeaders.TOPIC, orderCommandTopic)
                                 .setHeader(COMMAND_HEADER_NAME, "PaymentDoneEvent")
                                 .build()
