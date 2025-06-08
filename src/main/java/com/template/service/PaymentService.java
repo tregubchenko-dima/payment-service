@@ -47,6 +47,7 @@ public class PaymentService {
                 );
             } else {
                 var paymentCancelledEvent = new PaymentCanceledEvent();
+                paymentCancelledEvent.setOrderId(event.getOrderId());
                 paymentCancelledEvent.setName(event.getName());
                 kafkaTemplate.send(
                         MessageBuilder.withPayload(objectMapper.writeValueAsString(paymentCancelledEvent))

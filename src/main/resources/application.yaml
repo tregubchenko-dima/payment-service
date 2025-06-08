@@ -23,4 +23,4 @@ spring:
         command:
           topic: order-command-topic
 payment:
-  mode: true
+  mode: false
