@@ -52,7 +52,7 @@ public class PaymentService {
                 kafkaTemplate.send(
                         MessageBuilder.withPayload(objectMapper.writeValueAsString(paymentCancelledEvent))
                                 .setHeader(KafkaHeaders.TOPIC, orderCommandTopic)
-                                .setHeader(COMMAND_HEADER_NAME, "PaymentCancelledEvent")
+                                .setHeader(COMMAND_HEADER_NAME, "PaymentCanceledEvent")
                                 .build()
                 );
             }
