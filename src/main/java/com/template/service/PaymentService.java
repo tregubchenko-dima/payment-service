@@ -35,7 +35,6 @@ public class PaymentService {
     @Transactional
     public void createPayment(ProductTookEvent event) {
         var paymentEntity = paymentMapper.toPaymentEntity(event);
-        paymentRepository.save(paymentEntity);
 
         try {
             if (paymentMode) {
@@ -46,6 +45,7 @@ public class PaymentService {
                                 .build()
                 );
             } else {
+                paymentEntity.setStatus("PAYMENT_ERROR");
                 var paymentCancelledEvent = new PaymentCanceledEvent();
                 paymentCancelledEvent.setOrderId(event.getOrderId());
                 paymentCancelledEvent.setName(event.getName());
@@ -60,5 +60,7 @@ public class PaymentService {
             log.error("Ошибка при сериализации PaymentDoneEvent");
             throw new RuntimeException(e);
         }
+
+        paymentRepository.save(paymentEntity);
     }
 }
