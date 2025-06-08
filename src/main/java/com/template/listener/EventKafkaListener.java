@@ -17,7 +17,7 @@ public class EventKafkaListener {
     private final ObjectMapper objectMapper;
     private final PaymentService paymentService;
 
-    @KafkaListener(topics = "${spring.kafka.services.order.command.topic}", containerFactory = "kafkaListenerContainerFactory")
+    @KafkaListener(topics = "${spring.kafka.command.topic}", containerFactory = "kafkaListenerContainerFactory")
     public void listen(ConsumerRecord<String, String> message) {
         log.info("MESSAGE RECEIVED: %s".formatted(message));
         var header = message.headers().lastHeader("command");
