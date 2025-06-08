@@ -18,6 +18,9 @@ spring:
     bootstrap-servers: localhost:9092
     command:
       topic: payment-command-topic
-
+    services:
+      order:
+        command:
+          topic: order-command-topic
 payment:
   mode: true
