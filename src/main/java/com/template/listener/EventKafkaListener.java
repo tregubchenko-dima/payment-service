@@ -22,7 +22,7 @@ public class EventKafkaListener {
         log.info("MESSAGE RECEIVED: %s".formatted(message));
         var header = message.headers().lastHeader("command");
         if (header != null) {
-            if (String.valueOf(header.value()).equals("ProductTookEvent")) {
+            if (new String(header.value()).equals("ProductTookEvent")) {
                 try {
                     paymentService.createPayment(objectMapper.readValue(message.value(), ProductTookEvent.class));
                 } catch (Exception e) {
